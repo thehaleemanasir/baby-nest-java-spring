@@ -8,6 +8,8 @@ import lombok.ToString;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.net.DatagramPacket;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
@@ -66,7 +68,7 @@ public class Orders implements Serializable {
     private List<OrderItems> orderItemsList;
 
 
-
-
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<OrderItems> orderItems;
 
 }

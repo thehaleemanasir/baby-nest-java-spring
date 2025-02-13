@@ -25,6 +25,7 @@ public class OrderItems implements Serializable {
     @Column(name = "quantity")
     private int quantity;
 
+
     // @Max(value=?)  @Min(value=?)//if you know the range of your decimal fields consider using these annotations to enforce field validation
     @Basic(optional = false)
     @Column(name = "unit_price")
