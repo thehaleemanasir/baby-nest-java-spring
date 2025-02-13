@@ -57,9 +57,6 @@ public class OrderService {
     }
 
     //for id tsv
-    /**
-     * Converts an order summary to TSV format.
-     */
     public String convertToTSV(OrderSummaryDTO order) {
         StringBuilder tsv = new StringBuilder("Order ID\tCustomer Name\tTotal Amount\tStatus\tPayment Status\n");
         tsv.append(order.getOrderId()).append("\t")
@@ -88,6 +85,16 @@ public class OrderService {
                 .setBold()
                 .setFontSize(18)
                 .setTextAlignment(TextAlignment.CENTER));
+
+        // boolean isFullyPaid = order.getPaymentStatus().equalsIgnoreCase("Completed");
+//        boolean isPending = order.getPaymentStatus().equalsIgnoreCase("Pending");
+//        boolean isFailed = order.getPaymentStatus().equalsIgnoreCase("Failed");
+//
+//        if (isFullyPaid) {
+//            document.add(new Paragraph("\n No outstanding balance. Payment is Completed."));
+//        } else if (isFailed) {
+//            document.add(new Paragraph("\nPayment Failed. Please complete payment to process the order."));
+
 
         //  Order Details
         document.add(new Paragraph("Order ID: " + order.getOrderId()));

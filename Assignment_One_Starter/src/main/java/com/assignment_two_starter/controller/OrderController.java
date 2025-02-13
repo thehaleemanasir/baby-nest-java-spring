@@ -84,6 +84,23 @@ public class OrderController {
     }
 
     /**
+     * Generate a PDF invoice for a specific order.
+     */
+    @GetMapping(value = "/{orderId}/invoice", produces = MediaType.APPLICATION_PDF_VALUE)
+    public ResponseEntity<byte[]> generateInvoice(@PathVariable Integer orderId) throws IOException {
+        byte[] pdf = orderService.generateInvoice(orderId);
+        if (pdf == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_PDF);
+        headers.setContentDisposition(ContentDisposition.attachment().filename("invoice_" + orderId + ".pdf").build());
+
+        return ResponseEntity.ok().headers(headers).body(pdf);
+    }
+
+    /**
      * Converts response based on the Accept header.
      */
     private ResponseEntity<?> formatResponse(String acceptHeader, OrderSummaryDTO orderSummary) {
@@ -111,24 +128,5 @@ public class OrderController {
 
         return ResponseEntity.ok(orderSummary);
     }
-
-
-    /**
-     * Generate a PDF invoice for a specific order.
-     */
-    @GetMapping(value = "/{orderId}/invoice", produces = MediaType.APPLICATION_PDF_VALUE)
-    public ResponseEntity<byte[]> generateInvoice(@PathVariable Integer orderId) throws IOException {
-        byte[] pdf = orderService.generateInvoice(orderId);
-        if (pdf == null) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
-        }
-
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_PDF);
-        headers.setContentDisposition(ContentDisposition.attachment().filename("invoice_" + orderId + ".pdf").build());
-
-        return ResponseEntity.ok().headers(headers).body(pdf);
-    }
-
 
 }
