@@ -33,9 +33,42 @@ public class OrderService {
         return orders.stream().map(OrderSummaryDTO::new).collect(Collectors.toList());
     }
 
+    //getall tsv
+    public String convertToallTSV(List<OrderSummaryDTO> ordersSummary) {
+        StringBuilder builder = new StringBuilder();
+
+        builder.append("Order ID\tCustomer Name\tTotal Amount\tStatus\tPayment Status\n");
+
+
+        for (OrderSummaryDTO order : ordersSummary) {
+            builder.append(order.getOrderId()).append("\t")
+                    .append(order.getCustomerName()).append("\t")
+                    .append(order.getTotalAmount()).append("\t")
+                    .append(order.getStatus()).append("\t")
+                    .append(order.getPaymentStatus()).append("\n");
+        }
+
+        return builder.toString();
+    }
+
     // getOrderSummary
     public Optional<OrderSummaryDTO> getOrderSummary(Integer orderId) {
         return orderRepository.findById(orderId).map(OrderSummaryDTO::new);
+    }
+
+    //for id tsv
+    /**
+     * Converts an order summary to TSV format.
+     */
+    public String convertToTSV(OrderSummaryDTO order) {
+        StringBuilder tsv = new StringBuilder("Order ID\tCustomer Name\tTotal Amount\tStatus\tPayment Status\n");
+        tsv.append(order.getOrderId()).append("\t")
+                .append(order.getCustomerName()).append("\t")
+                .append(order.getTotalAmount()).append("\t")
+                .append(order.getStatus()).append("\t")
+                .append(order.getPaymentStatus()).append("\n");
+
+        return tsv.toString();
     }
 
     //pdf
@@ -89,6 +122,8 @@ public class OrderService {
 
         return outputStream.toByteArray();
     }
+
+
 
 
 }

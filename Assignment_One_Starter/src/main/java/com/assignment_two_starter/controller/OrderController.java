@@ -47,7 +47,7 @@ public class OrderController {
                 return ResponseEntity.ok().contentType(MediaType.parseMediaType("application/x-yaml")).body(yamlResponse);
             }
             else if ("text/tab-separated-values".equalsIgnoreCase(acceptHeader)) {
-                String tsvResponse = convertToTSV(ordersSummary);
+                String tsvResponse = orderService.convertToallTSV(ordersSummary);
                 return ResponseEntity.ok().contentType(MediaType.parseMediaType("text/tab-separated-values")).body(tsvResponse);
             }
             else if (acceptHeader.contains(MediaType.APPLICATION_XML_VALUE)) {
@@ -63,22 +63,6 @@ public class OrderController {
         }
     }
 
-    private String convertToTSV(List<OrderSummaryDTO> ordersSummary) {
-        StringBuilder builder = new StringBuilder();
-
-        builder.append("Order ID\tCustomer Name\tTotal Amount\tStatus\tPayment Status\n");
-
-
-        for (OrderSummaryDTO order : ordersSummary) {
-            builder.append(order.getOrderId()).append("\t")
-                    .append(order.getCustomerName()).append("\t")
-                    .append(order.getTotalAmount()).append("\t")
-                    .append(order.getStatus()).append("\t")
-                    .append(order.getPaymentStatus()).append("\n");
-        }
-
-        return builder.toString();
-    }
 
 
 
@@ -100,6 +84,36 @@ public class OrderController {
     }
 
     /**
+     * Converts response based on the Accept header.
+     */
+    private ResponseEntity<?> formatResponse(String acceptHeader, OrderSummaryDTO orderSummary) {
+        try {
+            if ("application/x-yaml".equalsIgnoreCase(acceptHeader)) {
+                YAMLMapper yamlMapper = new YAMLMapper();
+                return ResponseEntity.ok()
+                        .contentType(MediaType.parseMediaType("application/x-yaml"))
+                        .body(yamlMapper.writeValueAsString(orderSummary));
+            }
+            if ("text/tab-separated-values".equalsIgnoreCase(acceptHeader)) {
+                return ResponseEntity.ok()
+                        .contentType(MediaType.parseMediaType("text/tab-separated-values"))
+                        .body(orderService.convertToTSV(orderSummary));
+            }
+            if ("application/xml".equalsIgnoreCase(acceptHeader)) {
+                XmlMapper xmlMapper = new XmlMapper();
+                return ResponseEntity.ok()
+                        .contentType(MediaType.APPLICATION_XML)
+                        .body(xmlMapper.writeValueAsString(orderSummary));
+            }
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error processing request.");
+        }
+
+        return ResponseEntity.ok(orderSummary);
+    }
+
+
+    /**
      * Generate a PDF invoice for a specific order.
      */
     @GetMapping(value = "/{orderId}/invoice", produces = MediaType.APPLICATION_PDF_VALUE)
@@ -116,46 +130,5 @@ public class OrderController {
         return ResponseEntity.ok().headers(headers).body(pdf);
     }
 
-    /**
-     * Converts response based on the Accept header.
-     */
-    private ResponseEntity<?> formatResponse(String acceptHeader, OrderSummaryDTO orderSummary) {
-        try {
-            if ("application/x-yaml".equalsIgnoreCase(acceptHeader)) {
-                YAMLMapper yamlMapper = new YAMLMapper();
-                return ResponseEntity.ok()
-                        .contentType(MediaType.parseMediaType("application/x-yaml"))
-                        .body(yamlMapper.writeValueAsString(orderSummary));
-            }
-            if ("text/tab-separated-values".equalsIgnoreCase(acceptHeader)) {
-                return ResponseEntity.ok()
-                        .contentType(MediaType.parseMediaType("text/tab-separated-values"))
-                        .body(convertToTSV(orderSummary));
-            }
-            if ("application/xml".equalsIgnoreCase(acceptHeader)) {
-                XmlMapper xmlMapper = new XmlMapper();
-                return ResponseEntity.ok()
-                        .contentType(MediaType.APPLICATION_XML)
-                        .body(xmlMapper.writeValueAsString(orderSummary));
-            }
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error processing request.");
-        }
 
-        return ResponseEntity.ok(orderSummary); // Default JSON response
-    }
-
-    /**
-     * Converts an order summary to TSV format.
-     */
-    private String convertToTSV(OrderSummaryDTO order) {
-        StringBuilder tsv = new StringBuilder("Order ID\tCustomer Name\tTotal Amount\tStatus\tPayment Status\n");
-        tsv.append(order.getOrderId()).append("\t")
-                .append(order.getCustomerName()).append("\t")
-                .append(order.getTotalAmount()).append("\t")
-                .append(order.getStatus()).append("\t")
-                .append(order.getPaymentStatus()).append("\n");
-
-        return tsv.toString();
-    }
 }
