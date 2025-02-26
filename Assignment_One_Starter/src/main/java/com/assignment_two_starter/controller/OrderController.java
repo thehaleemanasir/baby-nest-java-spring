@@ -5,6 +5,7 @@ import com.assignment_two_starter.service.OrderService;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLMapper;
 import org.springframework.http.*;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
@@ -14,6 +15,7 @@ import java.util.Optional;
 
 
 @RestController
+@PreAuthorize("hasRole('ADMIN')")
 @RequestMapping("/api/orders")
 public class OrderController {
 
@@ -30,14 +32,14 @@ public class OrderController {
     public ResponseEntity<?> getAllOrders(
             @RequestHeader(value = "Accept", defaultValue = MediaType.APPLICATION_JSON_VALUE) String acceptHeader) {
 
-            List<OrderSummaryDTO> ordersSummary = orderService.getAllOrders();
+        List<OrderSummaryDTO> ordersSummary = orderService.getAllOrders();
 
-            if (ordersSummary.isEmpty()) {
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No orders found.");
-            }
-
-            return formatResponse(acceptHeader, ordersSummary);
+        if (ordersSummary.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No orders found.");
         }
+
+        return formatResponse(acceptHeader, ordersSummary);
+    }
 
 
     private ResponseEntity<?> formatResponse(String acceptHeader, List<OrderSummaryDTO> ordersSummary) {

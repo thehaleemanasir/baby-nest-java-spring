@@ -33,7 +33,7 @@ public class OrderService {
         return orders.stream().map(OrderSummaryDTO::new).collect(Collectors.toList());
     }
 
-    //getall tsv
+    //get all tsv
     public String convertToallTSV(List<OrderSummaryDTO> ordersSummary) {
         StringBuilder builder = new StringBuilder();
 
@@ -51,7 +51,7 @@ public class OrderService {
         return builder.toString();
     }
 
-    // getOrderSummary
+
     public Optional<OrderSummaryDTO> getOrderSummary(Integer orderId) {
         return orderRepository.findById(orderId).map(OrderSummaryDTO::new);
     }
@@ -69,11 +69,11 @@ public class OrderService {
     }
 
     //pdf
-    public byte[] generateInvoice(Integer orderId) throws IOException {
+    public byte[] generateInvoice(Integer orderId) {
         Orders order = orderRepository.findById(orderId).orElse(null);
         if (order == null) {
-            return null;
-        }
+      return new byte[0];
+      }
 
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         PdfWriter writer = new PdfWriter(outputStream);
@@ -86,14 +86,6 @@ public class OrderService {
                 .setFontSize(18)
                 .setTextAlignment(TextAlignment.CENTER));
 
-        // boolean isFullyPaid = order.getPaymentStatus().equalsIgnoreCase("Completed");
-//        boolean isPending = order.getPaymentStatus().equalsIgnoreCase("Pending");
-//        boolean isFailed = order.getPaymentStatus().equalsIgnoreCase("Failed");
-//
-//        if (isFullyPaid) {
-//            document.add(new Paragraph("\n No outstanding balance. Payment is Completed."));
-//        } else if (isFailed) {
-//            document.add(new Paragraph("\nPayment Failed. Please complete payment to process the order."));
 
 
         //  Order Details

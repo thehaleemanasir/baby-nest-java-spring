@@ -1,41 +1,32 @@
 package com.assignment_two_starter.model;
 
-import java.io.Serializable;
-import java.util.Date;
-import java.util.List;
 import jakarta.persistence.*;
 import lombok.Data;
-import lombok.ToString;
 
-/**
- *
- * @author Alan.Ryan
- */
+import java.io.Serializable;
+import java.util.*;
+
 @Entity
 @Table(name = "users")
 @Data
+
 public class Customer implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
     @Column(name = "user_id")
     private Integer userId;
 
-    @Basic(optional = false)
     @Column(name = "first_name")
     private String firstName;
 
-    @Basic(optional = false)
     @Column(name = "last_name")
     private String lastName;
 
-    @Basic(optional = false)
-    @Column(name = "email")
+    @Column(name = "email", unique = true, nullable = false)
     private String email;
 
-    @Basic(optional = false)
-    @Column(name = "password")
+    @Column(name = "password", nullable = false)
     private String password;
 
     @Column(name = "phone")
@@ -49,20 +40,24 @@ public class Customer implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date updatedAt;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "customer")
-    @ToString.Exclude
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "user_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id")
+    )
+    private Set<Role> roles;
+
+    @OneToMany(mappedBy = "customer")
     private List<ShoppingCart> shoppingCartList;
 
     @OneToMany(mappedBy = "userId")
-    @ToString.Exclude
     private List<Address> addressesList;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "customer")
-    @ToString.Exclude
+    @OneToMany(mappedBy = "customer")
     private List<Review> reviewList;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "customer")
-    @ToString.Exclude
+    @OneToMany(mappedBy = "customer")
     private List<Orders> ordersList;
 
 }
