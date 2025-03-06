@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="b588ac43-022a-47f8-bcc0-2e4216da5e51" name="Changes" comment="Authentication and authorisation in process">
+      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/controller/OrderControllerCustomer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/controller/ProductController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/controller/ShoppingCartController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/dto/CartItemDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/dto/EditOrderDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/dto/OrderRequestDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/dto/OrderResponseDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/repository/CartItemRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/repository/OrderItemRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/repository/ShoppingCartRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/service/OrderServiceCustomer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/service/ProductService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/service/ShoppingCartService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assignment_One_Starter/src/main/resources/keystore.p12" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/AssignmentTwoApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/AssignmentTwoApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/config/JwtRequestFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/config/JwtRequestFilter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/config/JwtUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/config/JwtUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/config/WebSecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/config/WebSecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/controller/AuthenticationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/controller/AuthenticationController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/controller/OrderController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/controller/OrderController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/dto/AuthenticationResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/dto/AuthenticationResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/dto/OrderItemDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/dto/OrderItemDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/dto/OrderSummaryDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/dto/OrderSummaryDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/model/CartItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/model/CartItem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/model/Customer.java" beforeDir="false" afterPath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/model/Customer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/model/OrderItems.java" beforeDir="false" afterPath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/model/OrderItems.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/model/Orders.java" beforeDir="false" afterPath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/model/Orders.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/model/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/model/Product.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/model/Review.java" beforeDir="false" afterPath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/model/Review.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/model/ShoppingCart.java" beforeDir="false" afterPath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/model/ShoppingCart.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/repository/OrderRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/repository/OrderRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/repository/ProductRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/repository/ProductRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/service/AuthService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/service/AuthService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/service/OrderService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/service/OrderService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assignment_One_Starter/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/Assignment_One_Starter/src/main/resources/application.properties" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="AnnotationType" />
+        <option value="Interface" />
+        <option value="Class" />
+        <option value="Enum" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 4
+}</component>
+  <component name="ProjectId" id="2sa8SEtJI3CqNwLUHqVVwY12b1o" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="autoscrollFromSource" value="true" />
+    <option name="autoscrollToSource" value="true" />
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="openDirectoriesWithSingleClick" value="true" />
+    <option name="showLibraryContents" value="true" />
+    <option name="showMembers" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.PasswordHasher.executor": "Run",
+    "Maven.Assignment_One_Starter [clean].executor": "Run",
+    "Maven.Assignment_One_Starter [install].executor": "Run",
+    "Maven.Assignment_One_Starter [org.apache.maven.plugins:maven-clean-plugin:3.3.2:clean].executor": "Run",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "SONARLINT_PRECOMMIT_ANALYSIS": "true",
+    "Spring Boot.AssignmentTwoApplication.executor": "Run",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/halee/Documents/GitHub/sd4-assignment-one-2025-thehaleemanasir/Assignment_One_Starter/src/main/resources",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "settings.sync",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="com.assignment_two_starter.model" />
+      <recent name="com.assignment_two_starter.repository" />
+      <recent name="com.assignment_two_starter.dto" />
+      <recent name="com.assignment_two_starter.controller" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\halee\Documents\GitHub\sd4-assignment-one-2025-thehaleemanasir\Assignment_One_Starter\src\main\resources" />
+      <recent name="C:\Users\halee\Documents\GitHub\sd4-assignment-one-2025-thehaleemanasir\Assignment_One_Starter\src\main\java\com\assignment_two_starter\model" />
+      <recent name="C:\Users\halee\Documents\GitHub\sd4-assignment-one-2025-thehaleemanasir\Assignment_One_Starter\src\main\java\com\assignment_two_starter\config" />
+      <recent name="C:\Users\halee\Documents\GitHub\sd4-assignment-one-2025-thehaleemanasir\Assignment_One_Starter\src\main\resources\static\assets\sql" />
+      <recent name="C:\Users\halee\Documents\GitHub\sd4-assignment-one-2025-thehaleemanasir\Assignment_One_Starter\src\main\java\com\assignment_two_starter" />
+    </key>
+    <key name="ExtractSuperBase.RECENT_KEYS">
+      <recent name="com.assignment_two_starter.service" />
+      <recent name="com.assignment_two_starter.config" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="AssignmentTwoApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <option name="ALTERNATIVE_JRE_PATH" value="17" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+      <option name="DEBUG_MODE" value="true" />
+      <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
+      <module name="Assignment_One_Starter" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.assignment_two_starter.AssignmentTwoApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-a94e463ab2e7-intellij.indexing.shared.core-IU-243.25659.39" />
+        <option value="bundled-js-predefined-d6986cc7102b-1632447f56bf-JavaScript-IU-243.25659.39" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="b588ac43-022a-47f8-bcc0-2e4216da5e51" name="Changes" comment="" />
+      <created>1738682326071</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1738682326071</updated>
+      <workItem from="1738682328344" duration="77000" />
+      <workItem from="1738682585259" duration="14342000" />
+      <workItem from="1739215331512" duration="18011000" />
+      <workItem from="1739402266751" duration="522000" />
+      <workItem from="1739402823176" duration="365000" />
+      <workItem from="1739403360084" duration="7538000" />
+      <workItem from="1739447051138" duration="5004000" />
+      <workItem from="1739800804721" duration="3436000" />
+      <workItem from="1739804345386" duration="3000" />
+      <workItem from="1739804712003" duration="14112000" />
+      <workItem from="1740179977672" duration="30837000" />
+      <workItem from="1740402613909" duration="29778000" />
+      <workItem from="1740525794707" duration="3185000" />
+      <workItem from="1740529063607" duration="5161000" />
+      <workItem from="1740583136275" duration="20367000" />
+      <workItem from="1740659557509" duration="7605000" />
+      <workItem from="1740834769038" duration="75000" />
+      <workItem from="1740834922173" duration="15929000" />
+      <workItem from="1740922161111" duration="72228000" />
+    </task>
+    <task id="LOCAL-00001" summary=" Fetching order summaries in JSON, XML, YAML, and TSV.Fetching all orders in multiple formats and Generating invoices as PDFs">
+      <option name="closed" value="true" />
+      <created>1739410264075</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1739410264075</updated>
+    </task>
+    <task id="LOCAL-00002" summary=" Fetching order summaries in JSON, XML, YAML, and TSV.Fetching all orders in multiple formats and Generating invoices as PDFs">
+      <option name="closed" value="true" />
+      <created>1739452000480</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1739452000480</updated>
+    </task>
+    <task id="LOCAL-00003" summary=" Fetching order summaries in JSON, XML, YAML, and TSV.Fetching all orders in multiple formats and Generating invoices as PDFs">
+      <option name="closed" value="true" />
+      <created>1739456622767</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1739456622767</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Authentication and authorisation in process">
+      <option name="closed" value="true" />
+      <created>1740607830106</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1740607830106</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Authentication and authorisation in process">
+      <option name="closed" value="true" />
+      <created>1740607950455</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1740607950455</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="Surprise-Feature" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value=" Fetching order summaries in JSON, XML, YAML, and TSV.Fetching all orders in multiple formats and Generating invoices as PDFs" />
+    <MESSAGE value="Authentication and authorisation in process" />
+    <option name="LAST_COMMIT_MESSAGE" value="Authentication and authorisation in process" />
+  </component>
+</project>

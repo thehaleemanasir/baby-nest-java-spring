@@ -59,9 +59,12 @@ public class AuthService implements UserDetailsService {
         Customer customer = customerRepository.findByEmail(email)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
 
-        List<SimpleGrantedAuthority> authorities = customer.getRoles().stream()
-                .map(role -> new SimpleGrantedAuthority("ROLE_" + role.getRoleName()))
-                .collect(Collectors.toList());
+        List<SimpleGrantedAuthority> authorities = customer.getRoles() != null
+                ? customer.getRoles().stream()
+                .map(role -> new SimpleGrantedAuthority(role.getRoleName()))
+                .collect(Collectors.toList())
+                : new ArrayList<>();
+
 
         return org.springframework.security.core.userdetails.User
                 .withUsername(customer.getEmail())

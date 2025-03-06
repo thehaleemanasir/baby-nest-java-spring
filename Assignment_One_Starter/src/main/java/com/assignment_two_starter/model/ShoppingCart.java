@@ -37,8 +37,21 @@ public class ShoppingCart implements Serializable {
     @ToString.Exclude
     private Customer customer;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cartId")
+    @Column(name = "active", nullable = false)
+    private boolean active;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cart", orphanRemoval = true)
     @ToString.Exclude
-    private List<CartItem> cartItemList;
+    private List<CartItem> cartItems; // Corrected reference
+
+    @PrePersist
+    protected void onCreate() {
+        this.createdAt = new Date();
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        this.updatedAt = new Date();
+    }
 
 }

@@ -14,6 +14,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -49,9 +50,17 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 
             Claims claims = jwtUtil.extractAllClaims(jwt);
             List<String> roles = claims.get("roles", List.class);
+            if (roles == null) {
+                roles = new ArrayList<>();
+            }
+
+            System.out.println("Extracted roles from token: " + roles);
+
             List<SimpleGrantedAuthority> authorities = roles.stream()
-                    .map(SimpleGrantedAuthority::new)
+                    .map(role -> new SimpleGrantedAuthority("ROLE_" + role))
                     .collect(Collectors.toList());
+
+            System.out.println("Converted roles for Spring Security: " + authorities);
 
             UsernamePasswordAuthenticationToken authToken =
                     new UsernamePasswordAuthenticationToken(userDetails, null, authorities);

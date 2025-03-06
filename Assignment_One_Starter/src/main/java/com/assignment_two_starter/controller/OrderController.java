@@ -6,6 +6,7 @@ import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLMapper;
 import org.springframework.http.*;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
@@ -15,7 +16,6 @@ import java.util.Optional;
 
 
 @RestController
-@PreAuthorize("hasRole('ADMIN')")
 @RequestMapping("/api/orders")
 public class OrderController {
 
@@ -28,9 +28,14 @@ public class OrderController {
     /**
      * Fetch all order  (supports JSON, XML, YAML, and TSV).
      */
-    @GetMapping(produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE, "application/x-yaml", "text/tab-separated-values"})
+    @GetMapping(value = "/allOrder",produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE, "application/x-yaml", "text/tab-separated-values"})
     public ResponseEntity<?> getAllOrders(
-            @RequestHeader(value = "Accept", defaultValue = MediaType.APPLICATION_JSON_VALUE) String acceptHeader) {
+            @RequestHeader(value = "Accept", defaultValue = MediaType.APPLICATION_JSON_VALUE) String acceptHeader,   Authentication authentication) {
+
+        if (authentication.getAuthorities().stream().noneMatch(a -> a.getAuthority().equals("ROLE_ADMIN"))) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Access denied: Admins only.");
+        }
+
 
         List<OrderSummaryDTO> ordersSummary = orderService.getAllOrders();
 
@@ -74,7 +79,12 @@ public class OrderController {
     @GetMapping(value = "/{orderId}", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE, "application/x-yaml", "text/tab-separated-values"})
     public ResponseEntity<?> getOrderById(
             @PathVariable Integer orderId,
-            @RequestHeader(value = "Accept", defaultValue = MediaType.APPLICATION_JSON_VALUE) String acceptHeader) {
+            @RequestHeader(value = "Accept", defaultValue = MediaType.APPLICATION_JSON_VALUE) String acceptHeader, Authentication authentication) {
+
+
+        if (authentication.getAuthorities().stream().noneMatch(a -> a.getAuthority().equals("ROLE_ADMIN"))) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Access denied: Admins only.");
+        }
 
         Optional<OrderSummaryDTO> orderSummaryOptional = orderService.getOrderSummary(orderId);
         if (orderSummaryOptional.isEmpty()) {
@@ -89,7 +99,12 @@ public class OrderController {
      * Generate a PDF invoice for a specific order.
      */
     @GetMapping(value = "/{orderId}/invoice", produces = MediaType.APPLICATION_PDF_VALUE)
-    public ResponseEntity<byte[]> generateInvoice(@PathVariable Integer orderId) throws IOException {
+    public ResponseEntity<byte[]> generateInvoice(@PathVariable Integer orderId, Authentication authentication) throws IOException {
+
+        if (authentication.getAuthorities().stream().noneMatch(a -> a.getAuthority().equals("ROLE_ADMIN"))) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN)
+                    .body("Access denied: Admins only.".getBytes());
+        }
         byte[] pdf = orderService.generateInvoice(orderId);
         if (pdf == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);

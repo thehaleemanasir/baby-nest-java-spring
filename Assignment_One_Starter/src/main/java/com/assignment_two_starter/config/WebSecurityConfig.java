@@ -6,7 +6,6 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -26,15 +25,17 @@ public class WebSecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .csrf(AbstractHttpConfigurer::disable)
+                .csrf(csrf -> csrf.disable()) // Disable CSRF for APIs
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) // No HTTP session
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/auth/register", "/auth/login", "/auth/refresh-token").permitAll()
-                        .requestMatchers("wishlist/add", "wishlist/").permitAll()// Allow these endpoints
-                        .requestMatchers("/admin/**", "/api/orders/**").hasRole("ADMIN")
-                        .requestMatchers("/customer/**", "/api/orders/**" ).hasAnyRole("CUSTOMER", "ADMIN")
-                        .anyRequest().authenticated()
+                        .requestMatchers("/auth/**" ,"/auth/register/").permitAll() // Public access for authentication
+                        .requestMatchers("/api/products/**").permitAll()// Public access for viewing products
+                        .requestMatchers("/api/cart/**").permitAll()
+                        .requestMatchers("/orders/**").permitAll()// Customers can access cart
+                        //.requestMatchers("/api/cart/**").hasRole("CUSTOMER") // Customers can access cart
+                        .requestMatchers("/api/orders/**").hasRole("ADMIN")
+                        .anyRequest().authenticated() // Require authentication for everything else
                 )
-                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();

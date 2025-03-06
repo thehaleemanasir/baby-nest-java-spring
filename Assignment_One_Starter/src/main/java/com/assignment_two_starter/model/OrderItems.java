@@ -31,20 +31,21 @@ public class OrderItems implements Serializable {
     @Column(name = "unit_price")
 
     private BigDecimal unitPrice;
+
     @Basic(optional = false)
     @Column(name = "total_price")
-    private Double totalPrice;
+    private BigDecimal totalPrice;
 
     @JoinColumn(name = "order_id", referencedColumnName = "order_id")
     @ManyToOne(optional = false)
     @ToString.Exclude
     private Orders order;
 
-    @JoinColumn(name = "product_id", referencedColumnName = "product_id")
     @ManyToOne(optional = false)
-    @ToString.Exclude
+    @JoinColumn(name = "product_id", referencedColumnName = "product_id")
     private Product product;
 
-
-    
+    public void setPrice(BigDecimal price) {
+        this.unitPrice = price;
+    }
 }

@@ -123,6 +123,35 @@ public class OrderService {
     }
 
 
+    public List<Orders> getAllOrdersCustomer() {
+        return orderRepository.findAll();
+    }
 
+    public Orders getOrderById(Integer orderId) {
+        return orderRepository.findById(orderId).orElse(null);
+    }
+
+    public Orders createOrderCustomer(Orders order) {
+        return orderRepository.save(order);
+    }
+
+    public Orders updateOrderCustomer(Integer orderId, Orders updatedOrder) {
+        Optional<Orders> existingOrder = orderRepository.findById(orderId);
+        if (existingOrder.isPresent()) {
+            Orders order = existingOrder.get();
+            order.setTotalAmount(updatedOrder.getTotalAmount());
+            order.setStatus(updatedOrder.getStatus());
+            return orderRepository.save(order);
+        }
+        return null;
+    }
+
+    public boolean deleteOrderCustomer(Integer orderId) {
+        if (orderRepository.existsById(orderId)) {
+            orderRepository.deleteById(orderId);
+            return true;
+        }
+        return false;
+    }
 
 }

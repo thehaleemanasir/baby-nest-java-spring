@@ -45,10 +45,12 @@ public class OrderSummaryDTO {
     public OrderSummaryDTO(Orders orders) {
         this.orderId = orders.getOrderId();
         this.customerName = orders.getCustomer().getFirstName() + " " + orders.getCustomer().getLastName();
-        this.shippingAddress = orders.getShippingAddressId().getStreetAddress();
+        this.shippingAddress = (orders.getShippingAddressId() != null) ?
+                orders.getShippingAddressId().getStreetAddress() : "No Address Provided";
         this.status = orders.getStatus().toString();
         this.totalAmount = orders.getTotalAmount().doubleValue();
-        this.paymentStatus = orders.getPaymentsList().get(0).getStatus().toString();
+        this.paymentStatus = (!orders.getPaymentsList().isEmpty()) ?
+                orders.getPaymentsList().get(0).getStatus() : "No Payment Found";
     }
 
 

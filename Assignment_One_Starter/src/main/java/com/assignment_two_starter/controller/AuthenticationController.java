@@ -11,6 +11,9 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @RestController
 @RequestMapping("/auth")
 public class AuthenticationController {
@@ -39,8 +42,33 @@ public class AuthenticationController {
 
         final UserDetails userDetails = authService.loadUserByUsername(authRequest.getEmail());
         final String jwt = jwtUtil.generateToken(userDetails);
-
         final String refreshToken = jwtUtil.generateRefreshToken(userDetails);
-        return ResponseEntity.ok(new AuthenticationResponse(jwt, refreshToken));
+
+        List<String> roles = userDetails.getAuthorities().stream()
+                .map(auth -> auth.getAuthority())
+                .collect(Collectors.toList());
+
+        return ResponseEntity.ok(new AuthenticationResponse(jwt, refreshToken, roles));
     }
+
+    @PostMapping("/refresh")
+    public ResponseEntity<?> refresh(@RequestBody String refreshToken) {
+        final String email = jwtUtil.extractUsername(refreshToken);
+        final UserDetails userDetails = authService.loadUserByUsername(email);
+        final String jwt = jwtUtil.generateToken(userDetails);
+
+        List<String> roles = userDetails.getAuthorities().stream()
+                .map(auth -> auth.getAuthority())
+                .collect(Collectors.toList());
+
+        return ResponseEntity.ok(new AuthenticationResponse(jwt, refreshToken, roles));
+    }
+
+
+
+    @PostMapping("/logout")
+    public ResponseEntity<?> logout() {
+        return ResponseEntity.ok("Logged out successfully!");
+    }
+
 }

@@ -1,5 +1,6 @@
 package com.assignment_two_starter.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.ToString;
@@ -37,6 +38,7 @@ public class Review implements Serializable {
     @Column(name = "approved")
     private Boolean approved;
 
+    @JsonIgnore
     @JoinColumn(name = "user_id", referencedColumnName = "user_id")
     @ManyToOne(optional = false)
     @ToString.Exclude

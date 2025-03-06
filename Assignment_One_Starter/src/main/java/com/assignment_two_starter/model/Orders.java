@@ -1,5 +1,7 @@
 package com.assignment_two_starter.model;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.*;
@@ -8,8 +10,7 @@ import lombok.ToString;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.net.DatagramPacket;
-import java.util.Collection;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -37,8 +38,13 @@ public class Orders implements Serializable {
     @Column(name = "total_amount")
     private BigDecimal totalAmount;
 
+//    @Basic(optional = false)
+//    @Enumerated(EnumType.STRING)
+//    @Column(name = "status", nullable = false)
+//    private OrderStatus status = OrderStatus.PENDING;
+
     @Basic(optional = false)
-    @Column(name = "status")
+    @Column(name = "status, nullable = false")
     private String status;
 
     @Basic(optional = false)
@@ -70,5 +76,27 @@ public class Orders implements Serializable {
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<OrderItems> orderItems;
+
+    public void setCustomerId(Integer userId) {
+        this.customer.setUserId(userId);
+    }
+
+    public void setEstimatedDeliveryDate(LocalDate localDate) {
+        this.estimatedShippingDate = java.sql.Date.valueOf(localDate);
+    }
+
+    @PrePersist
+    protected void onCreate() {
+        this.orderDate = new Date();
+    }
+
+//    public enum OrderStatus {
+//        PENDING,
+//        SHIPPED,
+//        DELIVERED,
+//        PROCESSING,
+//        COMPLETED,
+//        CANCELLED
+//    }
 
 }

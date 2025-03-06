@@ -1,5 +1,6 @@
 package com.assignment_two_starter.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -49,6 +50,7 @@ public class Customer implements Serializable {
     private Set<Role> roles;
 
     @OneToMany(mappedBy = "customer")
+    @JsonIgnore
     private List<ShoppingCart> shoppingCartList;
 
     @OneToMany(mappedBy = "userId")

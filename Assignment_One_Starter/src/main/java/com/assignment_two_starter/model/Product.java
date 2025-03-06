@@ -1,5 +1,6 @@
 package com.assignment_two_starter.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.ToString;
@@ -55,10 +56,10 @@ public class Product implements Serializable {
     @ToString.Exclude
     private List<Review> reviewList;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "productId")
-    @ToString.Exclude
+    @OneToMany(mappedBy = "product")
     private List<CartItem> cartItemList;
 
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "product")
     @ToString.Exclude
     private List<OrderItems> orderItemsList;
@@ -67,5 +68,17 @@ public class Product implements Serializable {
     @ManyToOne
     @ToString.Exclude
     private Category category;
+
+    @PrePersist
+    protected void onCreate() {
+        this.createdAt = new Date();
+    }
+
+    @Column(name = "is_archived", nullable = false)
+    private Boolean isArchived = false;
+
+    public void toggleArchiveStatus() {
+        this.isArchived = !this.isArchived;
+    }
 
 }
