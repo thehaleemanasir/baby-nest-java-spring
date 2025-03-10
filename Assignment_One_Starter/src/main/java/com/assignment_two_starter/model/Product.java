@@ -81,4 +81,12 @@ public class Product implements Serializable {
         this.isArchived = !this.isArchived;
     }
 
+    public Integer getId() {
+        return productId;
+    }
+
+    public void setId(Integer id) {
+        this.productId = id;
+    }
+
 }

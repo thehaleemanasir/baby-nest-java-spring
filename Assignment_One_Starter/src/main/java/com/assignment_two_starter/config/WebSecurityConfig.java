@@ -26,15 +26,17 @@ public class WebSecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .csrf(csrf -> csrf.disable()) // Disable CSRF for APIs
-                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) // No HTTP session
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/auth/**" ,"/auth/register/").permitAll() // Public access for authentication
-                        .requestMatchers("/api/products/**").permitAll()// Public access for viewing products
+                        .requestMatchers("/auth/**" ,"/auth/register/").permitAll()
+                        .requestMatchers("/api/products/**").permitAll()
                         .requestMatchers("/api/cart/**").permitAll()
-                        .requestMatchers("/orders/**").permitAll()// Customers can access cart
-                        //.requestMatchers("/api/cart/**").hasRole("CUSTOMER") // Customers can access cart
+                        .requestMatchers("/orders/**").permitAll()
+                        .requestMatchers("/wishlist/**", "/wishlist/create/").hasRole("CUSTOMER")
+                        .requestMatchers("/notifications/**").hasRole("CUSTOMER")
+                        //.requestMatchers("/api/cart/**").hasRole("CUSTOMER")
                         .requestMatchers("/api/orders/**").hasRole("ADMIN")
-                        .anyRequest().authenticated() // Require authentication for everything else
+                        .anyRequest().authenticated()
                 )
                 .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
 

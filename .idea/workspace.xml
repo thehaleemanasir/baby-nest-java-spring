@@ -4,49 +4,34 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b588ac43-022a-47f8-bcc0-2e4216da5e51" name="Changes" comment="Authentication and authorisation in process">
-      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/controller/OrderControllerCustomer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/controller/ProductController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/controller/ShoppingCartController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/dto/CartItemDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/dto/EditOrderDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/dto/OrderRequestDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/dto/OrderResponseDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/repository/CartItemRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/repository/OrderItemRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/repository/ShoppingCartRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/service/OrderServiceCustomer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/service/ProductService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/service/ShoppingCartService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assignment_One_Starter/src/main/resources/keystore.p12" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/AssignmentTwoApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/AssignmentTwoApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/config/JwtRequestFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/config/JwtRequestFilter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/config/JwtUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/config/JwtUtil.java" afterDir="false" />
+    <list default="true" id="b588ac43-022a-47f8-bcc0-2e4216da5e51" name="Changes" comment="Authentication and authorisation worked shopping cart and order in process">
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/controller/NotificationController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/dto/ClearWishlistRequestDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/dto/ProductDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/dto/RemoveWishlistItemRequestDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/dto/WishlistRequestDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/dto/WishlistResponseDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/model/Notification.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/model/WishlistProduct.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/model/WishlistProductId.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/repository/NotificationRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/repository/WishlistProductRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/service/NotificationService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assignment_One_Starter/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Assignment_One_Starter/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/config/WebSecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/config/WebSecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/controller/AuthenticationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/controller/AuthenticationController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/controller/OrderController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/controller/OrderController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/dto/AuthenticationResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/dto/AuthenticationResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/dto/OrderItemDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/dto/OrderItemDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/dto/OrderSummaryDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/dto/OrderSummaryDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/model/CartItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/model/CartItem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/model/Customer.java" beforeDir="false" afterPath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/model/Customer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/model/OrderItems.java" beforeDir="false" afterPath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/model/OrderItems.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/model/Orders.java" beforeDir="false" afterPath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/model/Orders.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/controller/ProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/controller/ProductController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/controller/ShoppingCartController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/controller/ShoppingCartController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/controller/WishlistController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/controller/WishlistController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/model/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/model/Product.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/model/Review.java" beforeDir="false" afterPath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/model/Review.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/model/ShoppingCart.java" beforeDir="false" afterPath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/model/ShoppingCart.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/model/Wishlist.java" beforeDir="false" afterPath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/model/Wishlist.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/repository/OrderRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/repository/OrderRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/repository/ProductRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/repository/ProductRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/service/AuthService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/service/AuthService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/service/OrderService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/service/OrderService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assignment_One_Starter/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/Assignment_One_Starter/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/repository/WishlistRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/repository/WishlistRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/service/ProductService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/service/ProductService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/service/WishlistService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/service/WishlistService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,9 +42,9 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="AnnotationType" />
+        <option value="Enum" />
         <option value="Interface" />
         <option value="Class" />
-        <option value="Enum" />
       </list>
     </option>
   </component>
@@ -181,7 +166,7 @@
       <workItem from="1740659557509" duration="7605000" />
       <workItem from="1740834769038" duration="75000" />
       <workItem from="1740834922173" duration="15929000" />
-      <workItem from="1740922161111" duration="72228000" />
+      <workItem from="1740922161111" duration="126650000" />
     </task>
     <task id="LOCAL-00001" summary=" Fetching order summaries in JSON, XML, YAML, and TSV.Fetching all orders in multiple formats and Generating invoices as PDFs">
       <option name="closed" value="true" />
@@ -223,7 +208,15 @@
       <option name="project" value="LOCAL" />
       <updated>1740607950455</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Authentication and authorisation worked shopping cart and order in process">
+      <option name="closed" value="true" />
+      <created>1741272336987</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1741272336987</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -255,6 +248,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value=" Fetching order summaries in JSON, XML, YAML, and TSV.Fetching all orders in multiple formats and Generating invoices as PDFs" />
     <MESSAGE value="Authentication and authorisation in process" />
-    <option name="LAST_COMMIT_MESSAGE" value="Authentication and authorisation in process" />
+    <MESSAGE value="Authentication and authorisation worked shopping cart and order in process" />
+    <option name="LAST_COMMIT_MESSAGE" value="Authentication and authorisation worked shopping cart and order in process" />
   </component>
 </project>

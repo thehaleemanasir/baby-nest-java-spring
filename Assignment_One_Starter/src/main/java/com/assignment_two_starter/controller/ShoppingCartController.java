@@ -44,7 +44,7 @@ public class ShoppingCartController {
                     ));
         }
 
-        Customer user = userOptional.get(); // Fetch user details
+        Customer user = userOptional.get();
 
 
         ShoppingCart cart = shoppingCartService.getActiveCartForCustomer(userId);
@@ -63,7 +63,7 @@ public class ShoppingCartController {
         Map<String, Object> response = new LinkedHashMap<>();
         response.put("status", HttpStatus.OK.value());
         response.put("cartId", cart.getCartId());
-        response.put("userEmail", user.getEmail()); // Replace userId with email
+        response.put("userEmail", user.getEmail());
 
         List<Map<String, Object>> items = cart.getCartItems().stream().map(item -> {
             Map<String, Object> itemMap = new LinkedHashMap<>();
@@ -122,13 +122,13 @@ public class ShoppingCartController {
 
         List<CartItem> cartItems = cart.getCartItems();
         if (cartItems == null) {
-            cartItems = new ArrayList<>(); // Assign empty list to prevent null errors
+            cartItems = new ArrayList<>();
         }
 
 
         Map<String, Object> response = new HashMap<>();
         response.put("cartId", cart.getCartId());
-        response.put("userEmail", user.getEmail()); // Replace userId with email
+        response.put("userEmail", user.getEmail());
 
         List<Map<String, Object>> items = cartItems.stream().map(item -> {
             Map<String, Object> itemMap = new HashMap<>();

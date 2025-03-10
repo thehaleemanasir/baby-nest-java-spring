@@ -6,16 +6,17 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @Transactional
 public class ProductService {
 
     private final ProductRepository productRepository;
+    private final NotificationService notificationService;
 
-    public ProductService(ProductRepository productRepository) {
+    public ProductService(ProductRepository productRepository, NotificationService notificationService) {
         this.productRepository = productRepository;
+        this.notificationService = notificationService;
     }
 
     public List<Product> findActiveProducts() {
@@ -30,19 +31,31 @@ public class ProductService {
         return productRepository.save(product);
     }
 
-    public Product updateProduct(Integer id, Product updatedProduct) {
-        Optional<Product> existingProduct = productRepository.findById(id);
-        if (existingProduct.isPresent()) {
-            Product product = existingProduct.get();
-            product.setName(updatedProduct.getName());
-            product.setDescription(updatedProduct.getDescription());
-            product.setPrice(updatedProduct.getPrice());
-            product.setStockQuantity(updatedProduct.getStockQuantity());
-            product.setCategory(updatedProduct.getCategory());
-            return productRepository.save(product);
+    @Transactional
+    public Product updateProduct(Integer productId, Product updatedProduct) {
+        Product existingProduct = productRepository.findById(productId)
+                .orElseThrow(() -> new IllegalArgumentException("Product not found"));
+
+        boolean priceDropped = updatedProduct.getPrice() < existingProduct.getPrice();
+        boolean lowStock = updatedProduct.getStockQuantity() < 5;
+
+        existingProduct.setPrice(updatedProduct.getPrice());
+        existingProduct.setStockQuantity(updatedProduct.getStockQuantity());
+
+        Product savedProduct = productRepository.save(existingProduct);
+
+        if (priceDropped) {
+            notificationService.checkPriceDrop(productId);
         }
-        return null;
+
+        if (lowStock) {
+            notificationService.checkLowStock(productId);
+        }
+
+        return savedProduct;
     }
+
+
 
     public boolean deleteProduct(Integer id) {
         if (productRepository.existsById(id)) {

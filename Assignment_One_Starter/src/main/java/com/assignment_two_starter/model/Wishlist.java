@@ -1,25 +1,52 @@
 package com.assignment_two_starter.model;
 
 import jakarta.persistence.*;
-import lombok.Data;
-import java.time.LocalDateTime;
+import lombok.Getter;
+import lombok.Setter;
+import org.springframework.data.annotation.Id;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 @Entity
-@Data
 @Table(name = "wishlist")
 public class Wishlist {
+
+    @Getter
+    @Setter
+    @jakarta.persistence.Id
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @Getter
+    @Setter
+    @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private Customer customer;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "product_id", nullable = false)
-    private Product product;
+    @Getter
+    @Setter
+    @Column(nullable = false)
+    private String wishlistName;
 
-    private String note;
+    @Getter
+    @OneToMany(mappedBy = "wishlist", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<WishlistProduct> wishlistProducts = new ArrayList<>();
+
+    @Setter
+    @Getter
+    @Column(nullable = false, updatable = false)
     private LocalDateTime createdAt = LocalDateTime.now();
+
+
+    @Setter
+    @Column(unique = true, nullable = true)
+    private String shareableLink;
+
+    public String getShareableLink() {
+        return shareableLink;
+    }
+
+    // Getters and Setters
 }
