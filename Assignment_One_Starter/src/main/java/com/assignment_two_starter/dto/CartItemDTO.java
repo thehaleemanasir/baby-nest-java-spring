@@ -3,21 +3,23 @@ package com.assignment_two_starter.dto;
 import lombok.Getter;
 import lombok.Setter;
 
-@Setter
 @Getter
+@Setter
 public class CartItemDTO {
+
     private Integer productId;
     private String productName;
-    private double price;
     private int quantity;
+    private double price;
     private double totalPrice;
 
-    public CartItemDTO(Integer productId, String productName, double price, int quantity) {
+    public CartItemDTO(Integer productId, String productName, int quantity, double price) {
         this.productId = productId;
         this.productName = productName;
-        this.price = price;
         this.quantity = quantity;
-        this.totalPrice = price * quantity;
+        this.price = Double.parseDouble(String.format("%.2f", price));
+        this.totalPrice = Double.parseDouble(String.format("%.2f", quantity * price));
     }
+
 
 }

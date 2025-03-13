@@ -25,16 +25,15 @@ public class WebSecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .csrf(csrf -> csrf.disable()) // Disable CSRF for APIs
+                .csrf(csrf -> csrf.disable())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/auth/**" ,"/auth/register/").permitAll()
                         .requestMatchers("/api/products/**").permitAll()
-                        .requestMatchers("/api/cart/**").permitAll()
+                        .requestMatchers("/api/cart/**").hasRole("CUSTOMER")
                         .requestMatchers("/orders/**").permitAll()
                         .requestMatchers("/wishlist/**", "/wishlist/create/").hasRole("CUSTOMER")
                         .requestMatchers("/notifications/**").hasRole("CUSTOMER")
-                        //.requestMatchers("/api/cart/**").hasRole("CUSTOMER")
                         .requestMatchers("/api/orders/**").hasRole("ADMIN")
                         .anyRequest().authenticated()
                 )

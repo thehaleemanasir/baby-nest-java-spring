@@ -6,6 +6,8 @@ import lombok.Data;
 import lombok.ToString;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -42,7 +44,7 @@ public class ShoppingCart implements Serializable {
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "cart", orphanRemoval = true)
     @ToString.Exclude
-    private List<CartItem> cartItems; // Corrected reference
+    private List<CartItem> cartItems = new ArrayList<>(); // Corrected reference
 
     @PrePersist
     protected void onCreate() {
@@ -53,5 +55,18 @@ public class ShoppingCart implements Serializable {
     protected void onUpdate() {
         this.updatedAt = new Date();
     }
+
+    public List<CartItem> getCartItems() {
+        if (cartItems == null) {
+            cartItems = new ArrayList<>();
+        }
+        return cartItems;
+    }
+
+    public void setCartItems(List<CartItem> cartItems) {
+        this.cartItems = cartItems != null ? cartItems : new ArrayList<>();
+    }
+
+
 
 }

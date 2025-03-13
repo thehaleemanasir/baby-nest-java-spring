@@ -4,34 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b588ac43-022a-47f8-bcc0-2e4216da5e51" name="Changes" comment="Authentication and authorisation worked shopping cart and order in process">
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/controller/NotificationController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/dto/ClearWishlistRequestDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/dto/ProductDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/dto/RemoveWishlistItemRequestDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/dto/WishlistRequestDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/dto/WishlistResponseDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/model/Notification.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/model/WishlistProduct.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/model/WishlistProductId.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/repository/NotificationRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/repository/WishlistProductRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/service/NotificationService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="b588ac43-022a-47f8-bcc0-2e4216da5e51" name="Changes" comment="wishlist working">
+      <change afterPath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/dto/AddToCartRequestDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/dto/CartResponseDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/dto/UpdateCartRequestDTO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assignment_One_Starter/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Assignment_One_Starter/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/config/WebSecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/config/WebSecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/controller/ProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/controller/ProductController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/controller/ShoppingCartController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/controller/ShoppingCartController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/controller/WishlistController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/controller/WishlistController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/dto/CartItemDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/dto/CartItemDTO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/model/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/model/Product.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/model/Wishlist.java" beforeDir="false" afterPath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/model/Wishlist.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/repository/OrderRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/repository/OrderRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/repository/ProductRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/repository/ProductRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/repository/WishlistRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/repository/WishlistRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/service/ProductService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/service/ProductService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/service/WishlistService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/service/WishlistService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/model/ShoppingCart.java" beforeDir="false" afterPath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/model/ShoppingCart.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/repository/ShoppingCartRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/repository/ShoppingCartRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/service/ShoppingCartService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Assignment_One_Starter/src/main/java/com/assignment_two_starter/service/ShoppingCartService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,37 +53,37 @@
     <option name="showLibraryContents" value="true" />
     <option name="showMembers" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.PasswordHasher.executor": "Run",
-    "Maven.Assignment_One_Starter [clean].executor": "Run",
-    "Maven.Assignment_One_Starter [install].executor": "Run",
-    "Maven.Assignment_One_Starter [org.apache.maven.plugins:maven-clean-plugin:3.3.2:clean].executor": "Run",
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "SONARLINT_PRECOMMIT_ANALYSIS": "true",
-    "Spring Boot.AssignmentTwoApplication.executor": "Run",
-    "git-widget-placeholder": "main",
-    "ignore.virus.scanning.warn.message": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/halee/Documents/GitHub/sd4-assignment-one-2025-thehaleemanasir/Assignment_One_Starter/src/main/resources",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "settings.sync",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.PasswordHasher.executor&quot;: &quot;Run&quot;,
+    &quot;Maven.Assignment_One_Starter [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.Assignment_One_Starter [install].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.Assignment_One_Starter [org.apache.maven.plugins:maven-clean-plugin:3.3.2:clean].executor&quot;: &quot;Run&quot;,
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;SONARLINT_PRECOMMIT_ANALYSIS&quot;: &quot;true&quot;,
+    &quot;Spring Boot.AssignmentTwoApplication.executor&quot;: &quot;Run&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/halee/Documents/GitHub/sd4-assignment-one-2025-thehaleemanasir/Assignment_One_Starter/src/main/resources&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;settings.sync&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="com.assignment_two_starter.model" />
@@ -135,8 +119,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9823dce3aa75-a94e463ab2e7-intellij.indexing.shared.core-IU-243.25659.39" />
-        <option value="bundled-js-predefined-d6986cc7102b-1632447f56bf-JavaScript-IU-243.25659.39" />
+        <option value="bundled-jdk-9823dce3aa75-a94e463ab2e7-intellij.indexing.shared.core-IU-243.25659.59" />
+        <option value="bundled-js-predefined-d6986cc7102b-1632447f56bf-JavaScript-IU-243.25659.59" />
       </set>
     </attachedChunks>
   </component>
@@ -166,7 +150,10 @@
       <workItem from="1740659557509" duration="7605000" />
       <workItem from="1740834769038" duration="75000" />
       <workItem from="1740834922173" duration="15929000" />
-      <workItem from="1740922161111" duration="126650000" />
+      <workItem from="1740922161111" duration="133152000" />
+      <workItem from="1741820434492" duration="310000" />
+      <workItem from="1741820770356" duration="1210000" />
+      <workItem from="1741869653763" duration="9509000" />
     </task>
     <task id="LOCAL-00001" summary=" Fetching order summaries in JSON, XML, YAML, and TSV.Fetching all orders in multiple formats and Generating invoices as PDFs">
       <option name="closed" value="true" />
@@ -216,7 +203,15 @@
       <option name="project" value="LOCAL" />
       <updated>1741272336987</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="wishlist working">
+      <option name="closed" value="true" />
+      <created>1741609525273</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1741609525273</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -249,6 +244,7 @@
     <MESSAGE value=" Fetching order summaries in JSON, XML, YAML, and TSV.Fetching all orders in multiple formats and Generating invoices as PDFs" />
     <MESSAGE value="Authentication and authorisation in process" />
     <MESSAGE value="Authentication and authorisation worked shopping cart and order in process" />
-    <option name="LAST_COMMIT_MESSAGE" value="Authentication and authorisation worked shopping cart and order in process" />
+    <MESSAGE value="wishlist working" />
+    <option name="LAST_COMMIT_MESSAGE" value="wishlist working" />
   </component>
 </project>

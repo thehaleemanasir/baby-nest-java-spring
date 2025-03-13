@@ -33,7 +33,7 @@ public class Product implements Serializable {
     @Column(name = "description")
     private String description;
 
-    // @Max(value=?)  @Min(value=?)//if you know the range of your decimal fields consider using these annotations to enforce field validation
+    // @Max(value=?)  @Min(value=?)
     @Basic(optional = false)
     @Column(name = "price")
     private Double price;
@@ -88,5 +88,14 @@ public class Product implements Serializable {
     public void setId(Integer id) {
         this.productId = id;
     }
+
+    public String getProductName() {
+        return name;
+    }
+
+    public boolean isActive() {
+        return !this.isArchived;
+    }
+
 
 }
