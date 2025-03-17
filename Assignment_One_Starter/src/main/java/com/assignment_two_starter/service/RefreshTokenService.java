@@ -21,9 +21,9 @@ public class RefreshTokenService {
         this.refreshTokenDurationMs = Long.parseLong(refreshTokenDurationMs);
     }
 
-    public RefreshToken createRefreshToken(Customer customer) {
+    public RefreshToken createRefreshToken(Optional<Customer> customer) {
         RefreshToken refreshToken = new RefreshToken();
-        refreshToken.setCustomer(customer);
+        customer.ifPresent(refreshToken::setCustomer);
         refreshToken.setToken(UUID.randomUUID().toString());
         refreshToken.setExpiryDate(Instant.now().plusMillis(refreshTokenDurationMs));
         return refreshTokenRepository.save(refreshToken);

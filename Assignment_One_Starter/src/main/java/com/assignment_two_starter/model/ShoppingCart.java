@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.ToString;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
@@ -42,7 +43,7 @@ public class ShoppingCart implements Serializable {
     @Column(name = "active", nullable = false)
     private boolean active;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cart", orphanRemoval = true)
+    @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @ToString.Exclude
     private List<CartItem> cartItems = new ArrayList<>(); // Corrected reference
 
@@ -56,6 +57,7 @@ public class ShoppingCart implements Serializable {
         this.updatedAt = new Date();
     }
 
+
     public List<CartItem> getCartItems() {
         if (cartItems == null) {
             cartItems = new ArrayList<>();
@@ -67,6 +69,11 @@ public class ShoppingCart implements Serializable {
         this.cartItems = cartItems != null ? cartItems : new ArrayList<>();
     }
 
-
+    public BigDecimal getTotalPrice() {
+        return cartItems.stream()
+                .map(cartItem -> BigDecimal.valueOf(cartItem.getProduct().getPrice())
+                        .multiply(BigDecimal.valueOf(cartItem.getQuantity())))
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+    }
 
 }

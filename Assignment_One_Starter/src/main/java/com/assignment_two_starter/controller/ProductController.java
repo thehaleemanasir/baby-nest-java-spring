@@ -2,6 +2,7 @@ package com.assignment_two_starter.controller;
 
 import com.assignment_two_starter.model.Product;
 import com.assignment_two_starter.service.ProductService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -10,6 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/products")
+@SecurityRequirement(name = "BearerAuth")
 public class ProductController {
 
     private final ProductService productService;

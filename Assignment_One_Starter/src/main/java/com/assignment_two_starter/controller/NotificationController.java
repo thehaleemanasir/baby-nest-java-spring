@@ -2,6 +2,7 @@ package com.assignment_two_starter.controller;
 
 import com.assignment_two_starter.model.Notification;
 import com.assignment_two_starter.service.NotificationService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -12,6 +13,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/notifications")
+@SecurityRequirement(name = "BearerAuth")
 public class NotificationController {
 
     private final NotificationService notificationService;

@@ -1,7 +1,5 @@
 package com.assignment_two_starter.model;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonValue;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.*;
@@ -38,14 +36,10 @@ public class Orders implements Serializable {
     @Column(name = "total_amount")
     private BigDecimal totalAmount;
 
-//    @Basic(optional = false)
-//    @Enumerated(EnumType.STRING)
-//    @Column(name = "status", nullable = false)
-//    private OrderStatus status = OrderStatus.PENDING;
-
     @Basic(optional = false)
-    @Column(name = "status, nullable = false")
+     @Column(name = "status", nullable = false)
     private String status;
+
 
     @Basic(optional = false)
     @Column(name = "address_change_fee")
@@ -88,6 +82,43 @@ public class Orders implements Serializable {
     @PrePersist
     protected void onCreate() {
         this.orderDate = new Date();
+    }
+
+    public String getPaymentStatus() {
+        return paymentsList.isEmpty() ? "Pending" : paymentsList.get(0).getStatus();
+    }
+
+    public void setShippingAddress(Address address) {
+        this.shippingAddressId = address;
+    }
+
+
+    public void setCity(String city) {
+        this.shippingAddressId.setCity(city);
+    }
+
+    public void setCounty(String county) {
+        this.shippingAddressId.setCounty(county);
+    }
+
+    public void setPostalCode(String postalCode) {
+        this.shippingAddressId.setPostalCode(postalCode);
+    }
+
+    public void setCountry(String country) {
+        this.shippingAddressId.setCountry(country);
+    }
+
+    public void setPaymentMethod(String paymentMethod) {
+        this.paymentsList.get(0).setPaymentMethod(paymentMethod);
+    }
+
+    public String getShippingAddress() {
+        return this.shippingAddressId.getStreetAddress();
+    }
+
+    public void setShippingAddress(String shippingAddress) {
+        this.shippingAddressId.setStreetAddress(shippingAddress);
     }
 
 //    public enum OrderStatus {

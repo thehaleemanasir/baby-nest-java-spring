@@ -4,6 +4,7 @@ import com.assignment_two_starter.dto.AddToCartRequestDTO;
 import com.assignment_two_starter.dto.CartResponseDTO;
 import com.assignment_two_starter.dto.UpdateCartRequestDTO;
 import com.assignment_two_starter.service.ShoppingCartService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -17,6 +18,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/cart")
+@SecurityRequirement(name = "BearerAuth")
 public class ShoppingCartController {
 
     private final ShoppingCartService shoppingCartService;
@@ -36,7 +38,7 @@ public class ShoppingCartController {
     public ResponseEntity<Object> getCart(Authentication authentication, @AuthenticationPrincipal UserDetails userDetails) {
         try {
             if (!authentication.isAuthenticated()) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(errorResponse("Unauthorized access.", new RuntimeException("Unauthorized access.")));
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(errorResponse("Unauthorized access.", new RuntimeException("Unauthorized access.")));
             }
             String email = getAuthenticatedEmail(userDetails);
             CartResponseDTO cart = shoppingCartService.getActiveCartForCustomer(email);

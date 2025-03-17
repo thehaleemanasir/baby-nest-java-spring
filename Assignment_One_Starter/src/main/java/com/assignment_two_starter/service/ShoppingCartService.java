@@ -35,32 +35,32 @@ public class ShoppingCartService {
     }
 
 
-   @Transactional
-public CartResponseDTO getActiveCartForCustomer(String email) {
-    Customer customer = customerRepository.findByEmail(email)
-            .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
+    @Transactional
+    public CartResponseDTO getActiveCartForCustomer(String email) {
+        Customer customer = customerRepository.findByEmail(email)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
 
 
-    ShoppingCart cart = shoppingCartRepository.findByCustomerEmailAndActive(email, true)
-            .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "No active cart found"));
+        ShoppingCart cart = shoppingCartRepository.findByCustomerEmailAndActive(email, true)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "No active cart found"));
 
-       if (cart.getCartItems() == null) {
-           cart.setCartItems(new ArrayList<>());
-       }
+        if (cart.getCartItems() == null) {
+            cart.setCartItems(new ArrayList<>());
+        }
 
-    List<CartItemDTO> items = cart.getCartItems().stream().map(item ->
-        new CartItemDTO(
-            item.getProduct().getProductId(),
-            item.getProduct().getName(),
-            item.getQuantity(),
-            item.getProduct().getPrice() * item.getQuantity()
-        )
-    ).collect(Collectors.toList());
+        List<CartItemDTO> items = cart.getCartItems().stream().map(item ->
+                new CartItemDTO(
+                        item.getProduct().getProductId(),
+                        item.getProduct().getName(),
+                        item.getQuantity(),
+                        item.getProduct().getPrice() * item.getQuantity()
+                )
+        ).collect(Collectors.toList());
 
-    double totalPrice = items.stream().mapToDouble(CartItemDTO::getPrice).sum();
-    totalPrice = Double.parseDouble(String.format("%.2f", totalPrice));
-       return new CartResponseDTO(cart.getCartId(), customer.getEmail(), items, totalPrice);
-}
+        double totalPrice = items.stream().mapToDouble(CartItemDTO::getPrice).sum();
+        totalPrice = Double.parseDouble(String.format("%.2f", totalPrice));
+        return new CartResponseDTO(cart.getCartId(), customer.getEmail(), items, totalPrice);
+    }
     @Transactional
     public CartResponseDTO addToCart(String email, AddToCartRequestDTO request) {
         Customer customer = customerRepository.findByEmail(email)
@@ -110,79 +110,79 @@ public CartResponseDTO getActiveCartForCustomer(String email) {
         return new CartResponseDTO(cart);
     }
 
-@Transactional
-public CartResponseDTO updateCartItem(String email, UpdateCartRequestDTO requestDTO) {
-    Customer customer = customerRepository.findByEmail(email)
-            .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
+    @Transactional
+    public CartResponseDTO updateCartItem(String email, UpdateCartRequestDTO requestDTO) {
+        Customer customer = customerRepository.findByEmail(email)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
 
-    ShoppingCart cart = shoppingCartRepository.findByCustomer(customer)
-            .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "No active cart found"));
+        ShoppingCart cart = shoppingCartRepository.findByCustomer(customer)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "No active cart found"));
 
-    CartItem cartItem = cart.getCartItems().stream()
-            .filter(item -> item.getProduct().getProductId().equals(requestDTO.getProductId()))
-            .findFirst()
-            .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Product not found in cart"));
+        CartItem cartItem = cart.getCartItems().stream()
+                .filter(item -> item.getProduct().getProductId().equals(requestDTO.getProductId()))
+                .findFirst()
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Product not found in cart"));
 
-    Product product = cartItem.getProduct();
+        Product product = cartItem.getProduct();
 
 
-    if (requestDTO.getNewQuantity() < 1) {
-        throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Quantity must be at least 1");
+        if (requestDTO.getNewQuantity() < 1) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Quantity must be at least 1");
+        }
+        if (requestDTO.getNewQuantity() > product.getStockQuantity()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+                    "Requested quantity exceeds available stock. Only " + product.getStockQuantity() + " left.");
+        }
+
+        cartItem.setQuantity(requestDTO.getNewQuantity());
+
+        BigDecimal totalPrice = cart.getCartItems().stream()
+                .map(item -> BigDecimal.valueOf(item.getProduct().getPrice()).multiply(BigDecimal.valueOf(item.getQuantity())))
+                .reduce(BigDecimal.ZERO, BigDecimal::add)
+                .setScale(2, BigDecimal.ROUND_HALF_UP);
+
+        shoppingCartRepository.save(cart);
+
+
+
+        return new CartResponseDTO(cart.getCartItems(), totalPrice);
     }
-    if (requestDTO.getNewQuantity() > product.getStockQuantity()) {
-        throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
-                "Requested quantity exceeds available stock. Only " + product.getStockQuantity() + " left.");
-    }
-
-    cartItem.setQuantity(requestDTO.getNewQuantity());
-
-    BigDecimal totalPrice = cart.getCartItems().stream()
-        .map(item -> BigDecimal.valueOf(item.getProduct().getPrice()).multiply(BigDecimal.valueOf(item.getQuantity())))
-        .reduce(BigDecimal.ZERO, BigDecimal::add)
-        .setScale(2, BigDecimal.ROUND_HALF_UP);
-
-    shoppingCartRepository.save(cart);
-
-
-
-    return new CartResponseDTO(cart.getCartItems(), totalPrice);
-}
 
     @Transactional
-public CartResponseDTO removeCartItem(String email, Integer productId) {
-    Customer customer = customerRepository.findByEmail(email)
-            .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
-    ShoppingCart cart = shoppingCartRepository.findByCustomerEmailAndActive(email, true)
-            .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "No active cart found"));
+    public CartResponseDTO removeCartItem(String email, Integer productId) {
+        Customer customer = customerRepository.findByEmail(email)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
+        ShoppingCart cart = shoppingCartRepository.findByCustomerEmailAndActive(email, true)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "No active cart found"));
 
-    CartItem cartItem = cart.getCartItems().stream()
-            .filter(item -> item.getProduct().getProductId().equals(productId))
-            .findFirst()
-            .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Product not found in cart"));
+        CartItem cartItem = cart.getCartItems().stream()
+                .filter(item -> item.getProduct().getProductId().equals(productId))
+                .findFirst()
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Product not found in cart"));
 
-    cart.getCartItems().remove(cartItem);
-    cartItemRepository.delete(cartItem);
-    shoppingCartRepository.save(cart);
+        cart.getCartItems().remove(cartItem);
+        cartItemRepository.delete(cartItem);
+        shoppingCartRepository.save(cart);
 
-    List<CartItemDTO> items = cart.getCartItems().stream().map(item -> {
-        CartItemDTO dto = new CartItemDTO(
-                item.getProduct().getProductId(),
-                item.getProduct().getName(),
-                item.getQuantity(),
-                item.getProduct().getPrice() * item.getQuantity()
-        );
-        dto.setProductId(item.getProduct().getProductId());
-        dto.setProductName(item.getProduct().getName());
-        dto.setQuantity(item.getQuantity());
-        dto.setPrice(item.getProduct().getPrice() * item.getQuantity());
-        return dto;
-    }).collect(Collectors.toList());
+        List<CartItemDTO> items = cart.getCartItems().stream().map(item -> {
+            CartItemDTO dto = new CartItemDTO(
+                    item.getProduct().getProductId(),
+                    item.getProduct().getName(),
+                    item.getQuantity(),
+                    item.getProduct().getPrice() * item.getQuantity()
+            );
+            dto.setProductId(item.getProduct().getProductId());
+            dto.setProductName(item.getProduct().getName());
+            dto.setQuantity(item.getQuantity());
+            dto.setPrice(item.getProduct().getPrice() * item.getQuantity());
+            return dto;
+        }).collect(Collectors.toList());
 
         BigDecimal totalPrice = items.stream()
-            .map(CartItemDTO::getPrice)
-            .map(BigDecimal::valueOf)
-            .reduce(BigDecimal.ZERO, BigDecimal::add)
-            .setScale(2, BigDecimal.ROUND_HALF_UP);
+                .map(CartItemDTO::getPrice)
+                .map(BigDecimal::valueOf)
+                .reduce(BigDecimal.ZERO, BigDecimal::add)
+                .setScale(2, BigDecimal.ROUND_HALF_UP);
 
         return new CartResponseDTO(cart.getCartId(), customer.getEmail(), items, totalPrice.doubleValue());
     }

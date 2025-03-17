@@ -48,4 +48,20 @@ public class OrderItems implements Serializable {
     public void setPrice(BigDecimal price) {
         this.unitPrice = price;
     }
+
+    public boolean isShipped() {
+        return order.getStatus().equalsIgnoreCase("shipped");
+    }
+
+    public boolean isPaid() {
+        return order.getPaymentStatus().equalsIgnoreCase("paid");
+    }
+
+    public String getPaymentStatus() {
+        return order.getPaymentStatus();
+    }
+
+    public String getShippingStatus() {
+        return order.getStatus();
+    }
 }

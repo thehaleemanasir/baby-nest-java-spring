@@ -56,7 +56,6 @@ public class ProductService {
     }
 
 
-
     public boolean deleteProduct(Integer id) {
         if (productRepository.existsById(id)) {
             productRepository.deleteById(id);

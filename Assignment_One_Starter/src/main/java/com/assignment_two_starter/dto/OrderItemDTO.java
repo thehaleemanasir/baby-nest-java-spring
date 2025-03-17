@@ -21,7 +21,7 @@ public class OrderItemDTO {
     private Double totalPrice;
 
     public OrderItemDTO(Integer productId, String productName, Double unitPrice, Integer quantity, Double totalPrice) {
-       this.productId = productId;
+        this.productId = productId;
         this.productName = productName;
         this.unitPrice = unitPrice;
         this.quantity = quantity;

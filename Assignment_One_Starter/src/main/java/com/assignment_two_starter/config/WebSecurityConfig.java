@@ -10,6 +10,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.access.channel.ChannelProcessingFilter;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
@@ -17,17 +18,21 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class WebSecurityConfig {
 
     private final JwtRequestFilter jwtRequestFilter;
+private final SSLRedirectFilter sslFilter;
 
-    public WebSecurityConfig(JwtRequestFilter jwtRequestFilter) {
+    public WebSecurityConfig(JwtRequestFilter jwtRequestFilter, SSLRedirectFilter sslFilter) {
         this.jwtRequestFilter = jwtRequestFilter;
+        this.sslFilter = sslFilter;
     }
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
+                .requiresChannel(channel -> channel.anyRequest().requiresSecure())
                 .csrf(csrf -> csrf.disable())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html").permitAll()
                         .requestMatchers("/auth/**" ,"/auth/register/").permitAll()
                         .requestMatchers("/api/products/**").permitAll()
                         .requestMatchers("/api/cart/**").hasRole("CUSTOMER")
@@ -35,8 +40,10 @@ public class WebSecurityConfig {
                         .requestMatchers("/wishlist/**", "/wishlist/create/").hasRole("CUSTOMER")
                         .requestMatchers("/notifications/**").hasRole("CUSTOMER")
                         .requestMatchers("/api/orders/**").hasRole("ADMIN")
+                        .requestMatchers("/order/**").hasRole("CUSTOMER")
                         .anyRequest().authenticated()
                 )
+                .addFilterBefore(sslFilter, ChannelProcessingFilter.class)
                 .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();

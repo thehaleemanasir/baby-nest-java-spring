@@ -4,6 +4,7 @@ import com.assignment_two_starter.dto.RemoveWishlistItemRequestDTO;
 import com.assignment_two_starter.dto.WishlistRequestDTO;
 import com.assignment_two_starter.dto.WishlistResponseDTO;
 import com.assignment_two_starter.service.WishlistService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +22,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/wishlist")
+@SecurityRequirement(name = "BearerAuth")
 public class WishlistController {
 
     private final WishlistService wishlistService;

@@ -4,6 +4,8 @@ import com.assignment_two_starter.dto.OrderSummaryDTO;
 import com.assignment_two_starter.service.OrderService;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLMapper;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import org.springframework.data.domain.Page;
 import org.springframework.http.*;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
@@ -17,6 +19,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/orders")
+@SecurityRequirement(name = "BearerAuth")
 public class OrderController {
 
     private final OrderService orderService;
@@ -28,47 +31,62 @@ public class OrderController {
     /**
      * Fetch all order  (supports JSON, XML, YAML, and TSV).
      */
-    @GetMapping(value = "/allOrder",produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE, "application/x-yaml", "text/tab-separated-values"})
+    @GetMapping(produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE, "application/x-yaml", "text/tab-separated-values"})
     public ResponseEntity<?> getAllOrders(
-            @RequestHeader(value = "Accept", defaultValue = MediaType.APPLICATION_JSON_VALUE) String acceptHeader,   Authentication authentication) {
+            @RequestHeader(value = "Accept", defaultValue = MediaType.APPLICATION_JSON_VALUE) String acceptHeader,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size,
+            Authentication authentication) {
 
         if (authentication.getAuthorities().stream().noneMatch(a -> a.getAuthority().equals("ROLE_ADMIN"))) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Access denied: Admins only.");
         }
 
+        Page<OrderSummaryDTO> ordersPage = orderService.getAllOrders(page, size);
 
-        List<OrderSummaryDTO> ordersSummary = orderService.getAllOrders();
-
-        if (ordersSummary.isEmpty()) {
+        if (ordersPage.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No orders found.");
         }
 
-        return formatResponse(acceptHeader, ordersSummary);
+        return formatResponse(acceptHeader, (Page<OrderSummaryDTO>) ordersPage);
     }
 
 
-    private ResponseEntity<?> formatResponse(String acceptHeader, List<OrderSummaryDTO> ordersSummary) {
+    private ResponseEntity<?> formatResponse(String acceptHeader, Page<OrderSummaryDTO> ordersPage) {
         try {
             if ("application/x-yaml".equalsIgnoreCase(acceptHeader)) {
-                String yamlResponse = new YAMLMapper().writeValueAsString(ordersSummary);
-                return ResponseEntity.ok().contentType(MediaType.parseMediaType("application/x-yaml")).body(yamlResponse);
+                YAMLMapper yamlMapper = new YAMLMapper();
+                return ResponseEntity.ok()
+                        .contentType(MediaType.parseMediaType("application/x-yaml"))
+                        .body(yamlMapper.writeValueAsString(ordersPage));
             }
             else if ("text/tab-separated-values".equalsIgnoreCase(acceptHeader)) {
-                String tsvResponse = orderService.convertToallTSV(ordersSummary);
-                return ResponseEntity.ok().contentType(MediaType.parseMediaType("text/tab-separated-values")).body(tsvResponse);
+                StringBuilder tsvResponse = new StringBuilder("Order ID\tCustomer Name\tTotal Amount\tStatus\tPayment Status\n");
+                for (OrderSummaryDTO order : ordersPage.getContent()) {
+                    tsvResponse.append(order.getOrderId()).append("\t")
+                            .append(order.getCustomerName()).append("\t")
+                            .append(order.getTotalAmount()).append("\t")
+                            .append(order.getStatus()).append("\t")
+                            .append(order.getPaymentStatus()).append("\n");
+                }
+                return ResponseEntity.ok()
+                        .contentType(MediaType.parseMediaType("text/tab-separated-values"))
+                        .body(tsvResponse.toString());
             }
             else if (acceptHeader.contains(MediaType.APPLICATION_XML_VALUE)) {
-                String xmlResponse = new XmlMapper().writeValueAsString(ordersSummary);
-                return ResponseEntity.ok().contentType(MediaType.APPLICATION_XML).body(xmlResponse);
+                XmlMapper xmlMapper = new XmlMapper();
+                return ResponseEntity.ok()
+                        .contentType(MediaType.APPLICATION_XML)
+                        .body(xmlMapper.writeValueAsString(ordersPage));
             }
             else {
-                return ResponseEntity.ok(ordersSummary);
+                return ResponseEntity.ok(ordersPage);
             }
         } catch (Exception e) {
-            e.printStackTrace();
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error processing response.");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error processing request.");
         }
     }
+
 
 
 
@@ -105,8 +123,9 @@ public class OrderController {
             return ResponseEntity.status(HttpStatus.FORBIDDEN)
                     .body("Access denied: Admins only.".getBytes());
         }
+
         byte[] pdf = orderService.generateInvoice(orderId);
-        if (pdf == null) {
+        if (pdf == null || pdf.length == 0) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         }
 
@@ -116,6 +135,7 @@ public class OrderController {
 
         return ResponseEntity.ok().headers(headers).body(pdf);
     }
+
 
     /**
      * Converts response based on the Accept header.
